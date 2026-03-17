@@ -252,6 +252,7 @@ form button {
     overflow: hidden;
     /* To remove the bullets of unordered list */
     list-style: none;
+    counter-reset: todo-counter;
 }
 
 .todo {
@@ -303,6 +304,16 @@ form button {
 
 .todo-item {
     padding: 0rem 0.5rem;
+}
+
+.todo {
+    counter-increment: todo-counter;
+}
+
+.todo-item::before {
+    content: counter(todo-counter) ". ";
+    font-weight: 600;
+    margin-right: 0.35rem;
 }
 
 .fa-trash, .fa-check { 
