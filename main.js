@@ -170,12 +170,25 @@ function removeLocalTodos(todo){
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+function setThemeSelectorState(color) {
+    const selectorState = [
+        { name: 'standard', element: standardTheme },
+        { name: 'light', element: lightTheme },
+        { name: 'darker', element: darkerTheme }
+    ];
+
+    selectorState.forEach(theme => {
+        theme.element.setAttribute('aria-pressed', theme.name === color ? 'true' : 'false');
+    });
+}
+
 // Change theme function:
 function changeTheme(color) {
     localStorage.setItem('savedTheme', color);
     savedTheme = localStorage.getItem('savedTheme');
 
     document.body.className = color;
+    setThemeSelectorState(color);
     // Change blinking cursor for darker theme:
     color === 'darker' ? 
         document.getElementById('title').classList.add('darker-title')
